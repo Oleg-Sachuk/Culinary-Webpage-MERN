@@ -1,0 +1,5 @@
+{
+    "port": 4000,
+    "jwtSecret": "culinary mern-key",
+    "mongoURL": "mongodb+srv://Oleg:KrakowPK98@cluster0.obvgb.mongodb.net/todos?retryWrites=true&w=majority"
+}
