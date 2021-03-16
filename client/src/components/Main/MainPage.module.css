@@ -1,0 +1,15 @@
+.titleblock {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.titlefont {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.cardblock {
+    margin: 20px;
+}

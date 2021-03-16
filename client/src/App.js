@@ -1,16 +1,14 @@
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
-import Footer from './components/Footer/Footer';
-import HeaderContainer from './components/Header/HeaderContainer';
-
+import { UseRoutes } from './routes';
 
 function App() {
+  const routes = UseRoutes(true);
   return (
     <BrowserRouter>
       <div className="App">
-        <HeaderContainer />
-        <h1>Hello!</h1>
-        <Footer />
+        {routes}
       </div>
     </BrowserRouter>
   );

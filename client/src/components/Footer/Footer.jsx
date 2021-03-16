@@ -9,7 +9,7 @@ const Footer = () => {
         <footer className="page-footer font-small">
             <div className="container-fluid">
                 <Row className={style.rowStyle}>
-                    <Col><h5 className="desc_font"><b>Find us</b></h5></Col>
+                    <Col><h5 className={style.font}><b>Find us</b></h5></Col>
                 </Row>
                 <Row className={style.bottomrowStyle}>
                     <Col md={'auto'}>

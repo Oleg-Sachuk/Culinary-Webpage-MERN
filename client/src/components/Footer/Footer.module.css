@@ -1,49 +1,56 @@
 .faFacebook {
-    padding: 20px;
-    font-size: 30px;
-    width: 60px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 30px;
+  max-height: 40px;
+  max-width: 40px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
   }
+
 .faTwitter{
-    padding: 20px;
-    font-size: 30px;
-    width: 60px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;    font-size: 30px;
+  width: 60px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
 }
 .faInstagram{
-  padding: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   font-size: 30px;
   width: 60px;
   text-align: center;
   text-decoration: none;
   border-radius: 50%;
 }  
-  /* Add a hover effect if you want */
-  .fa:hover {
-    opacity: 0.7;
-  }
+
+.fa:hover {
+  opacity: 0.7;
+}  
+
+.faFacebook {
+  background: #3B5998;
+  color: white;
+}
   
-  /* Set a specific color for each brand */
-  
-  /* Facebook */
-  .faFacebook {
-    background: #3B5998;
-    color: white;
-  }
-  
-  /* Twitter */
-  .faTwitter {
-    background: #55ACEE;
-    color: white;
-  }
-  .faInstagram {
-    background: #125688;
-    color: white;
-  }
+.faTwitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.faInstagram {
+  background: #125688;
+  color: white;
+}
   
 .rowStyle {
     text-align: center;
@@ -56,4 +63,10 @@
     margin: 30px;
 }
 
-/* row text-center py-2 justify-content-md-center */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.font {
+  font-family: 'Pacifico', cursive;
+  font-size: 25px;
+  color: #101820FF;
+}
