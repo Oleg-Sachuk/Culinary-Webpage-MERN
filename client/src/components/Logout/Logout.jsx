@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
-import { Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
 import Footer from '../Footer/Footer';
 import HeaderContainer from '../Header/HeaderContainer';
 import style from './Logout.module.css';
 
 const Logout = () => {
+    const history = useHistory();
     const auth = useContext(AuthContext);
 
     const Eventhandler = () => {
         auth.logout();
-        <Redirect to={'/'} />
+        history.push('/');
     }
 
     return (

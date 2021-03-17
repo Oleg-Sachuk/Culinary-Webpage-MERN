@@ -43,6 +43,17 @@ const SignIn = (props) => {
                         <form onSubmit={handleSubmit}>
                             <Row>
                                 <Col sm={2}>
+                                    <label>Login</label>
+                                </Col>
+                                <Col sm={10}>
+                                    <div>
+                                        <Field type={'text'} placeholder={'login'} name={'login'} component={Textarea}
+                                            validate={composeValidators(required, maxLength(20), minValue(3))} />
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={2}>
                                     <label>E-mail</label>
                                 </Col>
                                 <Col sm={10}>
