@@ -19,6 +19,9 @@ export const UseRoutes = isAuth => {
                 <Route path='/login' exact>
                     <SignIn />
                 </Route>
+                <Route path='/signup' exact>
+                    <SignUpPage />
+                </Route>
                 <Route>
                     <ReciptPage path='recipt/:id' />
                 </Route>

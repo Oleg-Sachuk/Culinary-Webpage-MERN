@@ -1,14 +1,18 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Form, Field} from 'react-final-form';
-import { maxLength, minValue, required} from '../../utils/validators/validators';
+import { Form, Field } from 'react-final-form';
+import { NavLink } from 'react-router-dom'
+import { maxLength, minValue, required } from '../../utils/validators/validators';
 import style from './Login.module.css';
 import Textarea from '../Common/Textarea';
+import { useHttp } from '../../hooks/http.hook';
 
 const composeValidators = (...validators) => value =>
     validators.reduce((error, validator) => error || validator(value), undefined)
 
 const SignIn = (props) => {
+    const { loading, request } = useHttp();
+
     return (
         <Container className={style.mainContainer}>
             <div className={style.headContainer}>
@@ -19,7 +23,8 @@ const SignIn = (props) => {
             <div className={style.mainForm}>
                 <Form
                     onSubmit={formData => {
-                        console.log(formData);
+                        const data = request('/api/auth/register', 'POST', { ...formData });
+                        console.log(data);
                     }}
                 >
                     {({ handleSubmit, pristine, submitting }) => (
@@ -49,17 +54,13 @@ const SignIn = (props) => {
                             <Row className={style.lastRow}>
                                 <Col sm={{ span: 10, offset: 2 }}>
                                     <div>
-                                        <Field type={'checkbox'} className={style.customCheckbox} id="rememberMe" name={'rememberMe'} component={'input'} />
-                                        <label htmlFor="rememberMe">Remember me</label>
-                                    </div>
-                                    <div>
-                                        <button disabled={pristine || submitting}>Sign In</button>
+                                        <button disabled={pristine || submitting || loading}>Submit</button>
+                                        <NavLink to={"/signup"} >
+                                            <button >Sign Up</button>
+                                        </NavLink>
                                     </div>
                                 </Col>
                             </Row>
-                            {props.captchaUrl && <img src={props.captchaUrl} alt={'captcha'} />}
-                            {props.captchaUrl && <Field type={'input'} name={'captcha'} component={Textarea}
-                                validate={composeValidators(required, maxLength(10), minValue(2))} />}
                         </form>
                     )}
                 </Form>

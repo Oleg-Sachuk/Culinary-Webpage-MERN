@@ -7,8 +7,8 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
 router.post('/register',
-    [check('email', "Uncorrect E-mail").isEmail(),
-    check('password', "Uncorrect password, min length is 6 symbols").isLength({ min: 6 })],
+    [check('email', "Incorrect E-mail").isEmail(),
+    check('password', "Incorrect password, min length is 6 symbols").isLength({ min: 6 })],
     async (req, res) => {
         try {
             const errors = validationResult(req);
@@ -19,14 +19,14 @@ router.post('/register',
                 })
             }
 
-            const { email, passord } = req.body;
+            const { email, password } = req.body;
             const candidate = await User.findOne({ email });
 
             if (candidate) {
                 return res.status(400).json({ message: "This user already exists" });
             }
 
-            const hashedPassword = await bcrypt.hash(passord, 15);
+            const hashedPassword = await bcrypt.hash(password, 15);
             const user = new User({ email, password: hashedPassword });
 
             await user.save();
@@ -44,6 +44,7 @@ router.post('/login',
     async (req, res) => {
         try {
             const errors = validationResult(req);
+            
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
@@ -58,7 +59,7 @@ router.post('/login',
                 return res.status(400).json({message: "User wasn't found"})
             }
 
-            const isMatch = await bcrypt.compare(password, user.passord);
+            const isMatch = await bcrypt.compare(password, user.password);
             if(!isMatch){
                 return res.status(400).json({message: "Incorrect password, please try again"})
             }
