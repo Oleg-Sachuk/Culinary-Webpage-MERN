@@ -6,7 +6,7 @@ import {Col, Row} from 'react-bootstrap';
 
 const Footer = () => {
     return (
-        <footer className="page-footer font-small">
+        <footer className={style.pageFooter}>
             <div className="container-fluid">
                 <Row className={style.rowStyle}>
                     <Col><h5 className={style.font}><b>Find us</b></h5></Col>

@@ -108,3 +108,16 @@
 .mainContainer {
     height: 100vh;
 }
+
+.authenticated {
+    margin-top: 6rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.vl {
+    border-left: 1px solid black;
+    height: auto;
+    position: left;
+    opacity: 0.5;
+}

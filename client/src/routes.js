@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import NewRecipt from './components/Create/NewRecipt';
-import SignIn from './components/Login/SignIn';
+import SignInContainer from './components/Login/SignInContainer';
+import Logout from './components/Logout/Logout';
 import MainPage from './components/Main/MainPage';
 import ReciptPage from './components/Recipt/ReciptPage';
 import SignUpPage from './components/SignUp/SignUpPage';
@@ -17,10 +18,13 @@ export const UseRoutes = isAuth => {
                     <MainPage />
                 </Route>
                 <Route path='/login' exact>
-                    <SignIn />
+                    <SignInContainer />
                 </Route>
                 <Route path='/signup' exact>
                     <SignUpPage />
+                </Route>
+                <Route path='/logout' exact>
+                    <Logout />
                 </Route>
                 <Route>
                     <ReciptPage path='recipt/:id' />
@@ -35,7 +39,7 @@ export const UseRoutes = isAuth => {
                 <MainPage />
             </Route>
             <Route path='/login' exact>
-                <SignIn />
+                <SignInContainer />
             </Route>
             <Route path='/signup' exact>
                 <SignUpPage />

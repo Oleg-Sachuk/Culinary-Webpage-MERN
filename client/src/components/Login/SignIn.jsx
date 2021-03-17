@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 import { NavLink } from 'react-router-dom'
@@ -6,12 +6,21 @@ import { maxLength, minValue, required } from '../../utils/validators/validators
 import style from './Login.module.css';
 import Textarea from '../Common/Textarea';
 import { useHttp } from '../../hooks/http.hook';
+import { AuthContext } from '../../context/AuthContext';
 
 const composeValidators = (...validators) => value =>
     validators.reduce((error, validator) => error || validator(value), undefined)
 
 const SignIn = (props) => {
-    const { loading, request } = useHttp();
+    const { loading, request, error, clearError } = useHttp();
+    const auth = useContext(AuthContext);
+
+    useEffect(() => {
+        if (error) {
+            alert(error);
+            clearError();
+        }
+    }, [error, clearError]);
 
     return (
         <Container className={style.mainContainer}>
@@ -23,7 +32,10 @@ const SignIn = (props) => {
             <div className={style.mainForm}>
                 <Form
                     onSubmit={formData => {
-                        const data = request('/api/auth/register', 'POST', { ...formData });
+                        const data = request('/api/auth/login', 'POST', { ...formData });
+                        data.then( res => {
+                            auth.login(res.token, res.userId);
+                        })
                         console.log(data);
                     }}
                 >

@@ -10,7 +10,7 @@ import { useHttp } from '../../hooks/http.hook';
 const composeValidators = (...validators) => value =>
     validators.reduce((error, validator) => error || validator(value), undefined)
 
-const SignIn = (props) => {
+const SignUp = (props) => {
     const { loading, request, error, clearError } = useHttp();
 
     useEffect(() => {
@@ -81,4 +81,4 @@ const SignIn = (props) => {
     )
 }
 
-export default SignIn;
+export default SignUp;
