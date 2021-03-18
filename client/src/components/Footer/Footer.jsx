@@ -31,7 +31,7 @@ const Footer = () => {
             </div>
 
             <hr />
-            <div className="footer-copyright text-center py-1 color-me">©2020-2021 Oleg Sachuk</div>
+            <div className="footer-copyright text-center py-1 color-me"><b>©2021 Oleg Sachuk</b></div>
         </footer>
     )
 }

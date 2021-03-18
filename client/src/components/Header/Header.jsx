@@ -1,12 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './Header.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faStickyNote, faUser } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../../context/AuthContext';
+import { UserContext } from '../../context/UserContext';
 
 const Header = (props) => {
+    const [data, setData] = useState();
     const auth = useContext(AuthContext);
+    const usercont = useContext(UserContext);
+
+
+    useEffect(() => {
+        if (usercont.login != null) {
+            setData(usercont)
+        }
+
+    }, [data, usercont])
 
     return (
         <nav className="navbar navbar-expand-lg" style={{ fontSize: 'large' }}>
@@ -22,7 +33,7 @@ const Header = (props) => {
                                 <NavLink className={style.navFont} to="/login" exact> Unsigned <FontAwesomeIcon icon={faUser} /></NavLink>
                             </li>
                             : <li className={style.navItem}>
-                                <NavLink className={style.navFont} to="/logout" exact> Signed In <FontAwesomeIcon icon={faUser} /></NavLink>
+                                <NavLink className={style.navFont} to="/logout" exact> {usercont.login || "Signed In"} <FontAwesomeIcon icon={faUser} /></NavLink>
                             </li>
                         }
                         <hr className={style.vl} />

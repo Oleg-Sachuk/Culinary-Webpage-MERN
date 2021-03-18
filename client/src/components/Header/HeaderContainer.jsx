@@ -5,6 +5,7 @@ import { UserContext } from '../../context/UserContext';
 
 const HeaderContainer = () => {
     const { email, userId, login, getUser, rmUser } = useUser();
+    
     return (
         <UserContext.Provider value={{email, userId, login, getUser, rmUser}}>
         <div>

@@ -6,12 +6,13 @@ import HeaderContainer from '../Header/HeaderContainer';
 import style from './Login.module.css';
 
 const Authenticated = () => {
+
     return (
         <div>
             <HeaderContainer />
             <div className={style.authenticated}>
                 <Card className="text-center">
-                    <Card.Header><h1>You are already logged in</h1></Card.Header>
+                    <Card.Header><h1>You are already logged in </h1></Card.Header>
                     <Card.Body>
                         <Card.Title>We offer you to checkout our recipes.</Card.Title>
                         <Card.Text>

@@ -36,7 +36,6 @@ const SignIn = (props) => {
                         data.then( res => {
                             auth.login(res.token, res.userId);
                         })
-                        console.log(data);
                     }}
                 >
                     {({ handleSubmit, pristine, submitting }) => (
