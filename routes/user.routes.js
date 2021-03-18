@@ -7,7 +7,6 @@ router.post('/getuser', async (req,res) => {
     try {
         const {userId} = req.body;
         const userdata = await User.findOne({ _id: userId});
-        console.log(userdata);
         res.status(200).json({userdata});
         
     } catch (error) {

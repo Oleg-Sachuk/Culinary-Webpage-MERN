@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-import NewRecipt from './components/Create/NewRecipt';
+import NewReciptContainer from './components/Create/NewReciptContainer';
 import SignInContainer from './components/Login/SignInContainer';
 import Logout from './components/Logout/Logout';
-// import MainPage from './components/Main/MainPage';
 import MainPageContainer from './components/Main/MainPageContainer';
 import ReciptPage from './components/Recipt/ReciptPage';
 import SignUpPage from './components/SignUp/SignUpPage';
@@ -13,7 +12,7 @@ export const UseRoutes = isAuth => {
         return (
             <Switch>
                 <Route path='/create' exact>
-                    <NewRecipt />
+                    <NewReciptContainer />
                 </Route>
                 <Route path='/' exact>
                     <MainPageContainer />
