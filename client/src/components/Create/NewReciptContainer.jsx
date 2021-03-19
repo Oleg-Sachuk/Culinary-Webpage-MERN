@@ -1,33 +1,43 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { UnitContext } from '../../context/UnitContext';
 import { useHttp } from '../../hooks/http.hook';
+import { useUnit } from '../../hooks/unit.hook';
 import Footer from '../Footer/Footer';
 import HeaderContainer from '../Header/HeaderContainer';
 import NewRecipt from './NewRecipt';
 
 const NewReciptContainer = (props) => {
-    const {request, loading} = useHttp();
+    const { request } = useHttp();
+    const dataRef = useRef();
+    const { unit, comp, blk, cons, liq, sol, getUnit, rmUnit } = useUnit();
 
-    const getUnitInfo = useCallback( async () =>{
+    const getUnitInfo = useCallback(async () => {
         try {
             const unitdata = await request('api/unit/getunits', 'GET', null);
             const data = unitdata.units[0];
-            console.log("Data",data);
+            dataRef.current = data;
         } catch (error) {
-            
+
         }
     }, [request])
-    
-    useEffect( () => {
+
+    useEffect(() => {
         getUnitInfo()
-    },[getUnitInfo])
+        if (dataRef.current != null) {
+            getUnit(dataRef.current)
+        }
+    }, [getUnitInfo,getUnit])
+
 
     return (
         <div>
-            <HeaderContainer />
-            <div>
-                <NewRecipt />
-            </div>
-            <Footer />
+            <UnitContext.Provider value={{ unit, comp, blk, cons, liq, sol, getUnit, rmUnit }}>
+                <HeaderContainer />
+                <div>
+                    <NewRecipt />
+                </div>
+                <Footer />
+            </UnitContext.Provider>
         </div>
     )
 }

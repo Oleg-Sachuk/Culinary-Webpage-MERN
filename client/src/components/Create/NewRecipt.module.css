@@ -54,6 +54,9 @@
 .formItem {
     justify-content: center;
     text-align: center;
+    font-weight: bold;
+    height: calc(1.5em + .75rem + 2px);
+    width: 80%;
     background: none;
     border-color: black;
     border-left: none;
@@ -61,14 +64,24 @@
     border-top: none;
 }
 
+.formItem:disabled {
+    border: none;
+}
+
 .formInput {
     background: none;
     height: calc(1.5em + .75rem + 2px);
     width: 100%;
     border-color: black;
+    font-weight: bold;
+    border-width: 1px;
     border-left: none;
     border-right: none;
     border-top: none;
+}
+
+.formInput:disabled {
+    border: none;
 }
 
 .formRow {
@@ -78,4 +91,28 @@
 .formOption {
     justify-content: center;
     text-align: center;
+}
+
+.btn {
+    background: none;
+    border: none;
+    font-family: 'Pacifico', cursive;
+    font-size: 16px;
+    height: calc(1.5em + .75rem + 2px);
+    width: 100%;
+    color: #101820FF;
+}
+
+.rmbtn {
+    margin-top: 2rem;
+    background: none;
+    border: none;
+    font-family: 'Pacifico', cursive;
+    font-size: 16px;
+    height: calc(1.5em + .75rem + 2px);
+    color: #101820FF;
+}
+
+.col {
+    width: 60px;
 }
