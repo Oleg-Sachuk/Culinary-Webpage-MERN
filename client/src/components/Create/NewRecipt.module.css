@@ -81,7 +81,12 @@
 }
 
 .formInput:disabled {
+    background: none;
     border: none;
+}
+
+.formInput:checked {
+    background: none;
 }
 
 .formRow {

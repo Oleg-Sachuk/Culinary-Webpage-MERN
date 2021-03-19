@@ -7,16 +7,21 @@ const SelectForm = (props) => {
     let options = [1, 2, 3, 4];
     let optiontypes = ['solid', 'liquid', 'bulk', 'const'];
     const dataRef = useRef();
+    let unitRef = useRef();
     const [diss, setDiss] = useState(false);
 
     if (props.data) {
-        // console.log("In form:", props.data.comp[0]);
         dataRef.current = props.data.comp[0];
         options = props.data.unit_arr_blk
+        unitRef = props.data.unit_arr_blk[0];
     }
 
-    const option = options.map(item => { return <option className={style.formOption} key={item}>{item}</option> });
-    let optiontype = optiontypes.map(item => { return <option className={style.formOption} key={item}>{item}</option> });
+    let option = options.map(item => { 
+        return <option className={style.formOption} key={item}>{item}</option> 
+    });
+    let optiontype = optiontypes.map(item => { 
+        return <option className={style.formOption} key={item}>{item}</option> 
+    });
 
 
     const onChangeState = (event) => {
@@ -33,10 +38,42 @@ const SelectForm = (props) => {
         }
     }
 
+    const onChangeType = (type) => {
+        switch (type) {
+            case "bulk":
+                option = props.data.unit_arr_blk.map(item => { 
+                    return <option className={style.formOption} key={item}>{item}</option> 
+                });
+                break;
+            case "liquid":
+                option = props.data.unit_arr_liq.map(item => { 
+                    return <option className={style.formOption} key={item}>{item}</option> 
+                });
+                break;
+            case "const":
+                option = props.data.unit_arr_const.map(item => { 
+                    return <option className={style.formOption} key={item}>{item}</option> 
+                });
+                break;
+            case "solid":
+                option = props.data.unit_arr_sol.map(item => { 
+                    return <option className={style.formOption} key={item}>{item}</option> 
+                });
+                break;
+        
+            default:
+                break;
+        }
+    }
+
     return (
         <Form
             onSubmit={formData => {
                 console.log(formData);
+                if(formData.type && formData.type !== unitRef){
+                    onChangeType(formData.type);
+                    unitRef = formData.type;
+                }
             }}
         >
             {({ handleSubmit, pristine, submitting }) => (

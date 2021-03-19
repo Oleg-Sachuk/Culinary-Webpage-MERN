@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { UnitContext } from '../../../context/UnitContext';
 import style from '../NewRecipt.module.css';
-import ListOfQuestions from './TestForm';
+import FormController from './FormController';
 
 const Section = (props) => {
     const unitcont = useContext(UnitContext);
@@ -35,7 +35,7 @@ const Section = (props) => {
                             </Col>
                         </Row>
                         <ul>
-                            <ListOfQuestions data = {dataRef.current} />
+                            <FormController data = {dataRef.current} />
                         </ul>
                     </div>
                 </div>
