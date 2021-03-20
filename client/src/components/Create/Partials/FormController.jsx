@@ -2,6 +2,7 @@ import React, { Fragment, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import SelectForm from "./SelectForm";
 import style from '../NewRecipt.module.css';
+import StepForm from "./StepForm";
 
 const FormController = (props) => {
     let ind = useRef(1);
@@ -37,7 +38,7 @@ const FormController = (props) => {
                             <button className={style.btn} onClick={handleDelete(index)}>X</button>
                         </Col>
                         <Col>
-                            <SelectForm {...props} sm={11} />
+                            {!props.type ? <SelectForm {...props} sm={11} /> : <StepForm {...props} sm={11} num={state.keys.indexOf(index)+1} />}
                         </Col>
                     </Row>
                 </span>

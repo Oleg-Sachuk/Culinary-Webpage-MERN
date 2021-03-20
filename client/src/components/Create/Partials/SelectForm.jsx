@@ -12,7 +12,7 @@ const SelectForm = (props) => {
 
     if (props.data) {
         dataRef.current = props.data.comp[0];
-        options = props.data.unit_arr_blk
+        options = props.data.unit_arr_sol
         unitRef = props.data.unit_arr_blk[0];
     }
 
@@ -25,17 +25,7 @@ const SelectForm = (props) => {
 
 
     const onChangeState = (event) => {
-        console.log(diss);
-        switch (diss) {
-            case false:
-                setDiss(true)
-                break;
-            case true:
-                setDiss(false)
-                break;
-            default:
-                break;
-        }
+        setDiss(!diss);
     }
 
     const onChangeType = (type) => {
@@ -79,9 +69,13 @@ const SelectForm = (props) => {
             {({ handleSubmit, pristine, submitting }) => (
                 <form onSubmit={handleSubmit} onChange={handleSubmit}>
                     <Row className={style.formRow}>
-                        <Col sm={6}>
+                        <Col sm={4}>
                             <Field type={'text'} placeholder={'ingredient'} name={'ingredient'} component={'input'} className={style.formInput}
                                 disabled={diss}/>
+                        </Col>
+                        <Col sm={2}>
+                            <Field type={'number'} placeholder={'amount'} name={'value'} component={'input'} className={style.formInput}
+                             disabled={diss}/>
                         </Col>
                         <Col sm={2}>
                             <Field className={style.formItem} name={'type'} component={'select'} disabled={diss}>
