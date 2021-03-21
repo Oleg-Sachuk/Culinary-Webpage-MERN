@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { UnitContext } from '../../context/UnitContext';
+import { RecipeContext } from '../../context/RecipeContext';
 import { useHttp } from '../../hooks/http.hook';
+import { useRecipe } from '../../hooks/recipe.hook';
 import { useUnit } from '../../hooks/unit.hook';
 import Footer from '../Footer/Footer';
 import HeaderContainer from '../Header/HeaderContainer';
@@ -10,6 +12,7 @@ const NewReciptContainer = (props) => {
     const { request } = useHttp();
     const dataRef = useRef();
     const { unit, comp, blk, cons, liq, sol, getUnit, rmUnit } = useUnit();
+    const { item, addItem, rmItem } = useRecipe();
 
     const getUnitInfo = useCallback(async () => {
         try {
@@ -34,7 +37,9 @@ const NewReciptContainer = (props) => {
             <UnitContext.Provider value={{ unit, comp, blk, cons, liq, sol, getUnit, rmUnit }}>
                 <HeaderContainer />
                 <div>
+                    <RecipeContext.Provider value={{ item, addItem, rmItem }}>
                     <NewRecipt />
+                    </RecipeContext.Provider>
                 </div>
                 <Footer />
             </UnitContext.Provider>

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
+import { RecipeContext } from '../../../context/RecipeContext';
 import { maxLength, minValue, required } from '../../../utils/validators/validators';
 import Textarea from '../../Common/Textarea';
 import style from '../NewRecipt.module.css';
 
 const NameForm = (props) => {
     const [diss, setDiss] = useState(false);
+    const Rec = useContext(RecipeContext);
 
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
@@ -15,6 +17,7 @@ const NameForm = (props) => {
         <Form
             onSubmit={formData => {
                 console.log(formData);
+                Rec.addItem(formData);
                 setDiss(!diss);
             }}
         >

@@ -1,13 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
+import { RecipeContext } from '../../../context/RecipeContext';
 import style from '../NewRecipt.module.css';
 
 const SelectForm = (props) => {
     let options = [1, 2, 3, 4];
     let optiontypes = ['solid', 'liquid', 'bulk', 'const'];
+    const Rec = useContext(RecipeContext);
     const dataRef = useRef();
     let unitRef = useRef();
+    let itemRef = useRef();
     const [diss, setDiss] = useState(false);
 
     if (props.data) {
@@ -25,6 +28,9 @@ const SelectForm = (props) => {
 
 
     const onChangeState = (event) => {
+        Rec.addItem(itemRef);
+        itemRef = null;
+        console.log("Item",Rec.item);
         setDiss(!diss);
     }
 
@@ -59,7 +65,7 @@ const SelectForm = (props) => {
     return (
         <Form
             onSubmit={formData => {
-                console.log(formData);
+                itemRef = formData;
                 if(formData.type && formData.type !== unitRef){
                     onChangeType(formData.type);
                     unitRef = formData.type;
