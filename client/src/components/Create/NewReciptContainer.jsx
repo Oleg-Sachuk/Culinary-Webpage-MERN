@@ -12,7 +12,7 @@ const NewReciptContainer = (props) => {
     const { request } = useHttp();
     const dataRef = useRef();
     const { unit, comp, blk, cons, liq, sol, getUnit, rmUnit } = useUnit();
-    const { ingredient, name, description, cooking, addItem, rmItem } = useRecipe();
+    const { ingredient, name, description, cooking, pictures, addItem, rmItem } = useRecipe();
 
     const getUnitInfo = useCallback(async () => {
         try {
@@ -37,7 +37,7 @@ const NewReciptContainer = (props) => {
             <UnitContext.Provider value={{ unit, comp, blk, cons, liq, sol, getUnit, rmUnit }}>
                 <HeaderContainer />
                 <div>
-                    <RecipeContext.Provider value={{ ingredient, name, description, cooking, addItem, rmItem }}>
+                    <RecipeContext.Provider value={{ ingredient, name, description, cooking, pictures, addItem, rmItem }}>
                     <NewRecipt />
                     </RecipeContext.Provider>
                 </div>

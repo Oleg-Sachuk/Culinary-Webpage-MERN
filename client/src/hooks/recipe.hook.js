@@ -6,10 +6,11 @@ export const useRecipe = () => {
     const [name, setName] = useState(null);
     const [description, setDescription] = useState(null);
     const [cooking, setCooking] = useState([{}]);
-    // const [pictures, setPirctures] = useState(null);
+    const [pictures, setPirctures] = useState([{}]);
     const [ingredient, setIngredient] = useState([{}]);
     let ingrRef = useRef([]);
     let cookRef = useRef([]);
+    let fileRef = useRef([]);
 
     const addItem = useCallback((obj, id, num) => {
         switch (id) {
@@ -25,6 +26,10 @@ export const useRecipe = () => {
                 cookRef.current.splice(num, 0, obj)
                 setCooking(cookRef.current);
                 break;
+            case "images":
+                fileRef.current.push(obj)
+                setPirctures(fileRef.current);
+                break;
 
             default:
                 break;
@@ -38,7 +43,7 @@ export const useRecipe = () => {
 
     }, []);
 
-    const rmItem = useCallback((obj,id, num) => {
+    const rmItem = useCallback((obj, id, num) => {
         let i = 0;
         switch (id) {
             case "title":
@@ -48,13 +53,18 @@ export const useRecipe = () => {
             case "ingredient":
                 i = ingrRef.current.indexOf(obj)
                 if (i > -1) {
-                    ingrRef.current.splice(i,1)
+                    ingrRef.current.splice(i, 1)
                 }
                 setIngredient(ingrRef.current);
                 break;
             case "cooking":
-                cookRef.current.splice(num,1)
+                cookRef.current.splice(num, 1)
                 setCooking(cookRef.current);
+                break;
+            case "images":
+                fileRef.current.length = 0;
+                debugger;
+                setPirctures(fileRef.current);
                 break;
 
             default:
@@ -65,12 +75,12 @@ export const useRecipe = () => {
 
     }, []);
 
-    useEffect( () => {
+    useEffect(() => {
         const data = JSON.parse(localStorage.getItem(storageName));
-        if(data && data.name){
+        if (data && data.name) {
             addItem(data, data.name);
         }
-    },[addItem])
+    }, [addItem])
 
-    return { addItem, rmItem, ingredient, name, description, cooking }
+    return { addItem, rmItem, ingredient, name, description, cooking, pictures }
 }
