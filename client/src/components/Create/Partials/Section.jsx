@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { UnitContext } from '../../../context/UnitContext';
 import style from '../NewRecipt.module.css';
+import FileForm from './FileForm';
 import FormController from './FormController';
 import NameForm from './NameForm';
 
@@ -58,6 +59,15 @@ const Section = (props) => {
                     </div>
                 </div>
                 <hr />
+                <div className={style.subSection}>
+                    <div>
+                        <p className={style.subtitlefont}><b>Maybe some pictures will help:</b></p>
+                    </div>
+                </div>
+                <div>
+                    <FileForm />
+                </div>
+                <hr/>
                 <div>
                     <p className={style.unitfont}><b>~ the end. ~</b></p>
                 </div>

@@ -3,43 +3,74 @@ import { useCallback, useEffect, useRef, useState } from "react"
 const storageName = 'recipeData';
 
 export const useRecipe = () => {
-    const [item, setItem] = useState([{}]);
     const [name, setName] = useState(null);
     const [description, setDescription] = useState(null);
-    const [cooking, setCooking] = useState(null);
-    const [pictures, setPirctures] = useState(null);
-    const [ingredient, setIngredient] = useState(null);
-    let itemRef = useRef([{}]); 
+    const [cooking, setCooking] = useState([{}]);
+    // const [pictures, setPirctures] = useState(null);
+    const [ingredient, setIngredient] = useState([{}]);
+    let ingrRef = useRef([]);
+    let cookRef = useRef([]);
 
-    const addItem = useCallback( (obj) => {
-        itemRef.current.push(obj)
-        setItem(itemRef.current);
+    const addItem = useCallback((obj, id, num) => {
+        switch (id) {
+            case "title":
+                setName(obj.name);
+                setDescription(obj.description)
+                break;
+            case "ingredient":
+                ingrRef.current.push(obj)
+                setIngredient(ingrRef.current);
+                break;
+            case "cooking":
+                cookRef.current.splice(num, 0, obj)
+                setCooking(cookRef.current);
+                break;
 
-        // switch (id) {
-        //     case "title":
-        //         break;
-        
-        //     default:
-        //         break;
-        // }
+            default:
+                break;
+        }
 
         localStorage.setItem(storageName, JSON.stringify({
-            item: obj,
+            name: obj.name,
+            description: obj.description,
+            // id: id
         }))
-    },[]);
 
-    const rmItem = useCallback( () => {
-        setItem(null);
+    }, []);
+
+    const rmItem = useCallback((obj,id, num) => {
+        let i = 0;
+        switch (id) {
+            case "title":
+                setName(null);
+                setDescription(null)
+                break;
+            case "ingredient":
+                i = ingrRef.current.indexOf(obj)
+                if (i > -1) {
+                    ingrRef.current.splice(i,1)
+                }
+                setIngredient(ingrRef.current);
+                break;
+            case "cooking":
+                cookRef.current.splice(num,1)
+                setCooking(cookRef.current);
+                break;
+
+            default:
+                break;
+        }
 
         localStorage.removeItem(storageName);
-    },[]);
+
+    }, []);
 
     useEffect( () => {
         const data = JSON.parse(localStorage.getItem(storageName));
-        if(data && data.item){
-            addItem(data.item);
+        if(data && data.name){
+            addItem(data, data.name);
         }
     },[addItem])
 
-    return {addItem, rmItem, item}
+    return { addItem, rmItem, ingredient, name, description, cooking }
 }

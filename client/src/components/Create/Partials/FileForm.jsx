@@ -2,24 +2,20 @@ import React, { useContext, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { RecipeContext } from '../../../context/RecipeContext';
-import { maxLength, minValue, required } from '../../../utils/validators/validators';
 import Textarea from '../../Common/Textarea';
 import style from '../NewRecipt.module.css';
 
-const StepForm = (props) => {
+const FileForm = (props) => {
     const [diss, setDiss] = useState(false);
     const Rec = useContext(RecipeContext);
-
-    const composeValidators = (...validators) => value =>
-    validators.reduce((error, validator) => error || validator(value), undefined)
 
     return (
         <Form
             onSubmit={formData => {
-                if(diss === false) {
-                    Rec.addItem(formData, "cooking", props.num-1);
+                if (diss === false) {
+                    Rec.addItem(formData, "cooking", props.num - 1);
                 } else {
-                    Rec.rmItem(formData, "cooking", props.num-1);
+                    Rec.rmItem(formData, "cooking", props.num - 1);
                 }
                 console.log("Cooking", Rec.cooking);
                 setDiss(!diss);
@@ -28,15 +24,17 @@ const StepForm = (props) => {
             {({ handleSubmit, pristine, submitting }) => (
                 <form onSubmit={handleSubmit} >
                     <Row className={style.formRow}>
-                        <Col sm={1}>
-                            <p className={style.number}><b>{props.num}.</b></p>
+                        <Col>
+                            <p className={style.unitfont}><b>Insert picture:</b></p>
                         </Col>
-                        <Col sm={9}>
-                            <Field type={'textarea'} placeholder={`step ${props.num}`} name={'step'} component={Textarea} className={style.formInput}
-                                validate={composeValidators(required, maxLength(500), minValue(10))} disabled={diss}/>
+                        <Col>
+                            <Field type={'file'} placeholder={'picture'} name={'step'} component={'input'} className={style.formInput}
+                               multiple disabled={diss} />
                         </Col>
-                        <Col sm={2}>
-                            {diss 
+                    </Row>
+                    <Row>
+                        <Col>
+                            {diss
                                 ? <button type={'submit'} className={style.btn} name={'btn'} disabled={submitting || pristine}>Added <b>&#10003;</b></button>
                                 : <button type={'submit'} className={style.btn} name={'btn'} disabled={submitting || pristine}>Add</button>
                             }
@@ -48,4 +46,4 @@ const StepForm = (props) => {
     )
 }
 
-export default StepForm;
+export default FileForm;

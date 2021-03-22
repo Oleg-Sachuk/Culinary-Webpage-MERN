@@ -16,8 +16,12 @@ const NameForm = (props) => {
     return (
         <Form
             onSubmit={formData => {
-                console.log(formData);
-                Rec.addItem(formData);
+                if(diss === false) {
+                    Rec.addItem(formData, "title");
+                } else {
+                    Rec.rmItem(formData, "title");
+                }
+                console.log("Name", Rec.name, "Description", Rec.description);
                 setDiss(!diss);
             }}
         >
