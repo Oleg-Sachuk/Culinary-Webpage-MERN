@@ -1,19 +1,22 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 const app = express();
 const PORT = config.get('port' || 4000);
 
-app.use(express.json({extended:true}))
+app.use(express.json({extended:true}));
+app.use(methodOverride('_method'));
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/user', require('./routes/user.routes'));
 app.use('/api/item', require('./routes/recipt.routes'));
 app.use('/api/unit', require('./routes/units.routes'));
+app.use('/api/files', require('./routes/uploads.routes'));
 
 const start = async () => {
     try {
-        await mongoose.connect(config.get("mongoURL"), {
+        await mongoose.connect(config.get("mongoURI"), {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true

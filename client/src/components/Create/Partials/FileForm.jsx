@@ -15,14 +15,17 @@ const FileForm = (props) => {
             }}
         >
             {({ handleSubmit, pristine, submitting }) => (
-                <form onChange={handleSubmit} >
+                <form action="/api/files/image/:e065e3bf13535e740ce3151819fb66e3.jpg" method={'GET'} encType={'multipart/form-data'} onChange={handleSubmit} >
                     <Row className={style.formRow}>
                         <Col>
                             <p className={style.unitfont}><b>Insert picture:</b></p>
                         </Col>
                         <Col>
-                            <Field type={'file'} placeholder={'picture'} name={'pictures'} component={'input'} className={style.formInput}
+                            <Field type={'file'} placeholder={'picture'} name={'pictures'} component={'input'} className={style.unitfont}
                                multiple={true} />
+                        </Col>
+                        <Col>
+                            <button type={'submit'}>Add files</button>
                         </Col>
                     </Row>
                     <Row>
