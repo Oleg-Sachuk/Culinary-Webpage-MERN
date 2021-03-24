@@ -7,7 +7,7 @@ export const useUpload = () => {
     const request = useCallback(async (url, method = 'POST', body = null, headers = {}) => {
         setLoading(true);
         try {
-        
+            // headers['Content-Type'] = 'application/json; charset=utf-8';
             const response = await fetch(url, { method, body, headers });
             const data = response.json();
             await data.then( res => {return setError(res.message)});

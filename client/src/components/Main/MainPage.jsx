@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { useUpload } from '../../hooks/upload.hook';
 import Footer from '../Footer/Footer';
 import HeaderContainer from '../Header/HeaderContainer';
 import style from './MainPage.module.css';
@@ -9,6 +10,22 @@ import ReciptCard from './RecipeCard';
 
 const MainPage = (props) => {
     const auth = useContext(AuthContext);
+
+    const {request} = useUpload();
+
+    const getUserInfo = useCallback( async () =>{
+        try {
+            const filedata = await request('/api/files/uploads', 'GET', null);
+            console.log("filedata:",filedata);
+        } catch (error) {
+            
+        }
+    }, [request])
+    
+    useEffect( () => {
+        getUserInfo()
+    },[getUserInfo])
+
     return (
         <div>
             <HeaderContainer />
