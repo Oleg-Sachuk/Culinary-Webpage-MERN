@@ -63,7 +63,6 @@ export const useRecipe = () => {
                 break;
             case "images":
                 fileRef.current.length = 0;
-                debugger;
                 setPirctures(fileRef.current);
                 break;
 
