@@ -18,7 +18,7 @@ const SelectForm = (props) => {
 
     if (props.data) {
         dataRef.current = props.data.comp[0];
-        options = props.data.unit_arr_sol
+        options = props.data.unit_arr_sol;
         unitRef = props.data.unit_arr_blk[0];
     }
 
@@ -37,7 +37,6 @@ const SelectForm = (props) => {
         } else {
             Rec.rmItem(state, "ingredient");
         }
-        console.log("Ingredient", Rec.ingredient);
         setDiss(!diss);
     }
 
@@ -80,13 +79,14 @@ const SelectForm = (props) => {
                     onChangeType(formData.type);
                     unitRef = formData.type;
                 }
+                console.log(formData);
             }}
         >
             {({ handleSubmit, pristine, submitting }) => (
                 <form onSubmit={handleSubmit} onChange={handleSubmit}>
                     <Row className={style.formRow}>
                         <Col sm={4}>
-                            <Field type={'text'} placeholder={'ingredient'} name={'ingredient'} component={Textarea} className={style.formInput}
+                            <Field type={'text'} placeholder={'ingredient'} name={'igr_name'} component={Textarea} className={style.formInput}
                                 validate={composeValidators(required, maxLength(50), minValue(2))} disabled={diss} />
                         </Col>
                         <Col sm={2}>

@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const path = require('path');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+const moment = require('moment');
 
 let gfs;
 
@@ -26,8 +27,10 @@ const storage = new GridFsStorage({
                     return reject(err);
                 }
                 // const filename = buf.toString('hex') + path.extname(file.originalname);
+                let date = moment().format('DDMMYYYY-HHmm')
+                const filename = `${date}-${file.originalname}`
                 const fileInfo = {
-                    filename: file.originalname,
+                    filename: filename,
                     bucketName: 'uploads'
                 };
                 resolve(fileInfo);

@@ -2,20 +2,24 @@ import React, { useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { RecipeContext } from '../../../context/RecipeContext';
+import { useHttp } from '../../../hooks/http.hook';
 import style from '../NewRecipt.module.css';
 // let form = document.getElementById('files');
 
 const FileForm = (props) => {
     const Rec = useContext(RecipeContext);
     let form = document.getElementById('files');
+    const { request } = useHttp();
 
-    const SubmitWholeForm = () => {
+    const SubmitWholeForm = async () => {
         const name = form.elements['pictures'].files;
         Rec.rmItem(null,'images');
         for(let i=0; i<name.length; ++i) {
             Rec.addItem(name[i].name, "images");
         }
-        console.log(Rec.pictures);
+        await request('/api/item/setrecipe', 'POST', {name: Rec.name, description: Rec.description,
+        cooking: Rec.cooking, pictures: Rec.pictures, ingredient: Rec.ingredient});
+        form.submit();
     }
 
     return (

@@ -10,7 +10,7 @@ app.use(express.json({extended:true}));
 app.use(methodOverride('_method'));
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/user', require('./routes/user.routes'));
-app.use('/api/item', require('./routes/recipt.routes'));
+app.use('/api/item', require('./routes/recipe.routes'));
 app.use('/api/unit', require('./routes/units.routes'));
 app.use('/api/files', require('./routes/uploads.routes'));
 

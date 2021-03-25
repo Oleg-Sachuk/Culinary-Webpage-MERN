@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useCallback, useEffect, useRef, useState } from "react"
 
 const storageName = 'recipeData';
@@ -27,7 +28,8 @@ export const useRecipe = () => {
                 setCooking(cookRef.current);
                 break;
             case "images":
-                fileRef.current.push(obj)
+                let date = moment().format('DDMMYYYY-HHmm')
+                fileRef.current.push(`${date}-${obj}`)
                 setPirctures(fileRef.current);
                 break;
 
@@ -58,7 +60,8 @@ export const useRecipe = () => {
                 setIngredient(ingrRef.current);
                 break;
             case "cooking":
-                cookRef.current.splice(num, 1)
+                let j = cookRef.current.indexOf(obj)
+                cookRef.current.splice(j, 1)
                 setCooking(cookRef.current);
                 break;
             case "images":

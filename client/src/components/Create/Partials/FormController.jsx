@@ -1,21 +1,33 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useContext, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import SelectForm from "./SelectForm";
 import style from '../NewRecipt.module.css';
 import StepForm from "./StepForm";
+import { RecipeContext } from "../../../context/RecipeContext";
 
 const FormController = (props) => {
-    let ind = useRef(1);
+    let arr = useRef([0]);
     const [state, setState] = useState({ keys: [`${0}`] });
+    const Rec = useContext(RecipeContext);
 
     const handleDelete = i => e => {
         e.preventDefault()
+        let j  = parseInt(i)
+        if(props.type) {
+            debugger;
+            Rec.rmItem(Rec.cooking[j],'cooking', j+1)
+        } else {
+            Rec.rmItem(Rec.ingredient[i.parseInt -1],'ingredient')
+        }
+        arr.current.pop();
         let keys = [
-            ...state.keys = state.keys.filter(item => {
-                return item !== i;
-            }),
-            ...state.keys.slice(i + 1)
+            ...state.keys.slice(i),
+
+            arr.current = state.keys.map( item => {
+                return `${state.keys.indexOf(item)}`
+            })
         ]
+        keys = arr.current;
         setState({
             keys
         })
@@ -23,7 +35,8 @@ const FormController = (props) => {
 
     const addQuestion = e => {
         e.preventDefault()
-        let keys = state.keys.concat([`${ind.current++}`])
+        arr.current.push(arr.current.length)
+        let keys = arr.current.map( item => `${arr.current.indexOf(item)}`)
         setState({
             keys
         })
