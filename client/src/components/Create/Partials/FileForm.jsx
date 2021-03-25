@@ -17,6 +17,7 @@ const FileForm = (props) => {
         for(let i=0; i<name.length; ++i) {
             Rec.addItem(name[i].name, "images");
         }
+        console.log(Rec.pictures);
         await request('/api/item/setrecipe', 'POST', {name: Rec.name, description: Rec.description,
         cooking: Rec.cooking, pictures: Rec.pictures, ingredient: Rec.ingredient});
         form.submit();
@@ -49,7 +50,7 @@ const FileForm = (props) => {
                 )}
             </Form>
             <div>
-                <button className={style.btn} onClick={() => SubmitWholeForm()}>This</button>
+                <button className={style.unitfont} onClick={() => SubmitWholeForm()}>Send the recipe!</button>
             </div>
         </div>
     )

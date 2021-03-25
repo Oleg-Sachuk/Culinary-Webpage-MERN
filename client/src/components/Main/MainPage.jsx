@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
@@ -10,13 +10,17 @@ import ReciptCard from './RecipeCard';
 
 const MainPage = (props) => {
     const auth = useContext(AuthContext);
-
+    const recipeData = useRef(null);
     const {request} = useUpload();
+    let Cards = useRef(null);
 
     const getUserInfo = useCallback( async () =>{
         try {
-            const filedata = await request('/api/files/uploads', 'GET', null);
+            const filedata = await request('/api/item/getrecipe', 'GET', null);
             console.log("filedata:",filedata);
+            debugger;
+            recipeData.current = filedata.recipes;
+            Cards.current = recipeData.current.map( recipe => <ReciptCard instance = {recipe} /> )
         } catch (error) {
             
         }
@@ -35,7 +39,7 @@ const MainPage = (props) => {
                         <b className={style.titlefont}>All Recipes:</b>
                     </div>
                     <div className={style.cardblock}>
-                        <ReciptCard {...props} />
+                        {Cards.current}
                     </div>
                     {auth.isAuth 
                         && <div className={style.titleblock}>
