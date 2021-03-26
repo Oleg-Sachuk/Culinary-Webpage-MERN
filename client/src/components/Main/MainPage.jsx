@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { useUpload } from '../../hooks/upload.hook';
@@ -18,11 +18,27 @@ const MainPage = (props) => {
         try {
             const filedata = await request('/api/item/getrecipe', 'GET', null);
             recipeData.current = filedata.recipes;
-            Cards.current = recipeData.current.map( recipe => <ReciptCard key={recipe.name} instance = {recipe} /> )
         } catch (error) {
             
         }
     }, [request])
+
+    const splitArray = (array, stride, size) => {
+        let tmp = [];
+        for(let i = 0; i < array.length; i += stride) {
+            tmp.push(array.slice(i, i + size));
+        }
+        return tmp;
+    }
+    
+    if(recipeData.current) {
+        let m1 = [];
+        for (let i = 0; i < recipeData.current.length; i++) {
+        m1.push(recipeData.current[i]);
+    }
+    let arr = (splitArray(m1, 2, recipeData.current.length));
+    Cards.current = arr.map( recipe => <ReciptCard key={recipe.name} instance = {recipe} /> )
+    }
     
     useEffect( () => {
         getUserInfo()
@@ -31,7 +47,6 @@ const MainPage = (props) => {
     return (
         <div>
             <HeaderContainer />
-            <Row>
                 <Col>
                     <div className={style.titleblock}>
                         <b className={style.titlefont}>All Recipes:</b>
@@ -42,12 +57,11 @@ const MainPage = (props) => {
                     {auth.isAuth 
                         && <div className={style.titleblock}>
                         <NavLink to={'/create'} >
-                        <button>Create your own recipt</button>
+                        <button>Create your own recipe</button>
                         </NavLink>
                         </div>
                     }
                 </Col>
-            </Row>
             <Footer />
         </div >
     )
