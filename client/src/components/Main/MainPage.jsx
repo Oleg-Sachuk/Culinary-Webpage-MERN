@@ -17,10 +17,8 @@ const MainPage = (props) => {
     const getUserInfo = useCallback( async () =>{
         try {
             const filedata = await request('/api/item/getrecipe', 'GET', null);
-            console.log("filedata:",filedata);
-            debugger;
             recipeData.current = filedata.recipes;
-            Cards.current = recipeData.current.map( recipe => <ReciptCard instance = {recipe} /> )
+            Cards.current = recipeData.current.map( recipe => <ReciptCard key={recipe.name} instance = {recipe} /> )
         } catch (error) {
             
         }

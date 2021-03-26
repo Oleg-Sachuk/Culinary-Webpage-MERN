@@ -12,14 +12,10 @@ const FileForm = (props) => {
     const { request } = useHttp();
 
     const SubmitWholeForm = async () => {
-        const name = form.elements['pictures'].files;
-        Rec.rmItem(null,'images');
-        for(let i=0; i<name.length; ++i) {
-            Rec.addItem(name[i].name, "images");
-        }
-        console.log(Rec.pictures);
-        await request('/api/item/setrecipe', 'POST', {name: Rec.name, description: Rec.description,
-        cooking: Rec.cooking, pictures: Rec.pictures, ingredient: Rec.ingredient});
+        await request('/api/item/setrecipe', 'POST', {
+            name: Rec.name, description: Rec.description,
+            cooking: Rec.cooking, pictures: Rec.pictures, ingredient: Rec.ingredient
+        });
         form.submit();
     }
 
@@ -27,7 +23,12 @@ const FileForm = (props) => {
         <div>
             <Form
                 onSubmit={formData => {
-                    
+                    const name = form.elements['pictures'].files;
+                    Rec.rmItem(null, 'images');
+                    for (let i = 0; i < name.length; ++i) {
+                        Rec.addItem(name[i].name, "images");
+                    }
+                    console.log(Rec.pictures);
                 }}
             >
                 {({ handleSubmit, pristine, submitting }) => (

@@ -69,24 +69,25 @@ router.get('/uploads/:filename', async (req, res) => {
 });
 
 
-router.get('/image/:filename', async (req, res) => {
-    try {
-        gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-            if (!file || file.length === 0) {
-                return res.status(404).json({ message: 'No file exisits' })
-            }
-        })
-        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-            const readstream = gfs.createReadStream(file.filename)
-            readstream.pipe(res)
-        } else {
-            res.status(404).json({ message: 'Not an image' })
+router.get('/image/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+
+        if (!file || file.length === 0) {
+            return res.status(404).json({
+                err: 'No file exists'
+            });
         }
 
-    } catch (error) {
-        return res.status(500).json({ message: "Could not find files, please try again" });
-    }
-})
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+            const readstream = gfs.createReadStream(file.filename);
+            readstream.pipe(res);
+        } else {
+            res.status(404).json({
+                message: 'Not an image'
+            });
+        }
+    });
+});
 
 router.post('/upload', upload.array('pictures', 5), async (req, res) => {
     try {
@@ -99,12 +100,12 @@ router.post('/upload', upload.array('pictures', 5), async (req, res) => {
 
 router.delete('/uploads/:id', (req, res) => {
     gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
-      if (err) {
-        return res.status(404).json({ message: err });
-      }
-  
-      res.redirect('/');
+        if (err) {
+            return res.status(404).json({ message: err });
+        }
+
+        res.redirect('/');
     });
-  });
+});
 
 module.exports = router;
