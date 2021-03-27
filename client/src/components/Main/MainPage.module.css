@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.font {
+  font-family: 'Pacifico', cursive;
+  color: #101820FF;
+}
+
 .titleblock {
     margin-left: auto;
     margin-right: auto;

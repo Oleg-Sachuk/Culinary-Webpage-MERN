@@ -49,7 +49,7 @@ const MainPage = (props) => {
             <HeaderContainer />
                 <Col>
                     <div className={style.titleblock}>
-                        <b className={style.titlefont}>All Recipes:</b>
+                        <h1><b className={style.font}>All Recipes:</b></h1>
                     </div>
                     <div className={style.cardblock}>
                         {Cards.current}

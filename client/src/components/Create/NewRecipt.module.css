@@ -80,13 +80,26 @@
     border-top: none;
 }
 
-.formInput:disabled {
+.formInput, .stepformInput :disabled {
     background: none;
     border: none;
 }
 
-.formInput:checked {
+.formInput, .stepformInput :checked {
     background: none;
+}
+
+.stepformInput {
+    background: none;
+    height: calc(1.5em + .75rem + 2px);
+    overflow: hidden;
+    width: 100%;
+    border-color: black;
+    font-weight: bold;
+    border-width: 1px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
 
 .formRow {
