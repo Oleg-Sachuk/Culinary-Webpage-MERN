@@ -13,6 +13,7 @@ app.use('/api/user', require('./routes/user.routes'));
 app.use('/api/item', require('./routes/recipe.routes'));
 app.use('/api/unit', require('./routes/units.routes'));
 app.use('/api/files', require('./routes/uploads.routes'));
+app.use('/', require('./routes/single-recipe.routes'));
 
 const start = async () => {
     try {

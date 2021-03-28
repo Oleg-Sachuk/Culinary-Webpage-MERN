@@ -4,7 +4,7 @@ import NewReciptContainer from './components/Create/NewReciptContainer';
 import SignInContainer from './components/Login/SignInContainer';
 import Logout from './components/Logout/Logout';
 import MainPageContainer from './components/Main/MainPageContainer';
-import ReciptPage from './components/Recipt/ReciptPage';
+import RecipePage from './components/Recipt/RecipePage';
 import SignUpPage from './components/SignUp/SignUpPage';
 
 export const UseRoutes = isAuth => {
@@ -27,7 +27,7 @@ export const UseRoutes = isAuth => {
                     <Logout />
                 </Route>
                 <Route>
-                    <ReciptPage path='recipt/:id' />
+                    <RecipePage path='recipe/:id' />
                 </Route>
                 <Redirect to='/' />
             </Switch>
@@ -45,7 +45,7 @@ export const UseRoutes = isAuth => {
                 <SignUpPage />
             </Route>
             <Route>
-                <ReciptPage path='recipt/:id' />
+                <RecipePage path='recipe/:id' />
             </Route>
         </Switch>
     )

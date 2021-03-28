@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.font {
+  font-family: 'Pacifico', cursive;
+  color: #101820FF;
+}
+
+.titleblock {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.mainContainer {
+    text-align: center; 
+    width: 70%; 
+    margin-left: 15%;
+}
+
+.descContainer {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: black;
+}
+
+.recSection {
+    background: url('../../assets/images/notebook4\(red\).jpg')no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.descFont {
+    font-family: 'Pacifico', cursive;
+    color: #101820FF;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.vl {
+    border-left: 1px solid white;
+    height: auto;
+    position: left;
+    opacity: 0.5;
+}

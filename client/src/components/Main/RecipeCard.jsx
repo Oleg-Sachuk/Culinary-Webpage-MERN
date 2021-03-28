@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import style from './MainPage.module.css';
 import image from '../../assets/images/foodcover.jpg';
 
-const ReciptCard = (props) => {
+const recipeCard = (props) => {
     const imgName = props.instance[0].pictures[0];
     const date = `${imgName.substring(0, 2)}.${imgName.substring(2, 4)}.${imgName.substring(4, 8)}`
     let imgName1 = null;
@@ -25,7 +25,7 @@ const ReciptCard = (props) => {
                     <DropdownButton className={style.dropdownBtn} >
                         <Dropdown.ItemText>{props.instance[0].description}</Dropdown.ItemText>
                     </DropdownButton>
-                    <NavLink to={`/recipt/${props.instance[0]._id}`}>
+                    <NavLink to={`/recipe/${props.instance[0]._id}`}>
                     <Card.Img variant="top" src={`/api/files/image/${imgName}`} />
                     <Card.Body>
                         <Card.Title>{props.instance[0].name}</Card.Title>
@@ -43,7 +43,7 @@ const ReciptCard = (props) => {
                     <DropdownButton className={style.dropdownBtn} >
                         <Dropdown.ItemText>{props.instance[1].description}</Dropdown.ItemText>
                     </DropdownButton>
-                    <NavLink to={`/recipt/${props.instance[1]._id}`}>
+                    <NavLink to={`/recipe/${props.instance[1]._id}`}>
                     <Card.Img variant="top" src={`/api/files/image/${imgName1}`} />
                     <Card.Body>
                         <Card.Title>{props.instance[1].name}</Card.Title>
@@ -77,4 +77,4 @@ const ReciptCard = (props) => {
     )
 }
 
-export default ReciptCard
+export default recipeCard
