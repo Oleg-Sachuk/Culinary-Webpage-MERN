@@ -38,7 +38,6 @@ const RecipePage = (props) => {
                     width="750" height="500"
                 />
                 <Carousel.Caption>
-                    <h3>{image}</h3>
                 </Carousel.Caption>
             </Carousel.Item>
         })

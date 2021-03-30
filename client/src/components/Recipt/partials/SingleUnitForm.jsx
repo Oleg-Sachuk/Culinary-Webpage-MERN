@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { UnitContext } from '../../../context/UnitContext';
@@ -12,9 +12,9 @@ const SingleUnitForm = (props) => {
 
     return (
         <li key={props.item.igr_name}>
-            <Row>
-                <Col sm={6}>{props.item.igr_name}</Col>
-                <Col sm={3}>{value}</Col>
+            <Row className={style.formtext}>
+                <Col sm={7}>{props.item.igr_name}</Col>
+                <Col sm={2}>{value}</Col>
                 <Col sm={3}>
                     <Form
                         onSubmit={formData => {
@@ -28,7 +28,7 @@ const SingleUnitForm = (props) => {
                         {({ handleSubmit }) => (
                             <form onSubmit={handleSubmit} onChange={handleSubmit}>
                                 <Col>
-                                    <Field className={style.formitem} name={'unit'} component={'select'}>
+                                    <Field className={style.formItem} name={'unit'} component={'select'}>
                                         <option selected>{props.item.unit}</option>
                                         {convertType(props.item, unit.unit)}
                                     </Field>

@@ -50,3 +50,23 @@
     position: left;
     opacity: 0.5;
 }
+
+.formItem {
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    width: 80%;
+    background: transparent;
+    border: none;
+}
+
+.formItem:disabled {
+    border: none;
+}
+
+.formtext {
+    margin: 1rem;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    height: calc(1.5em + .75rem + 2px);
+}

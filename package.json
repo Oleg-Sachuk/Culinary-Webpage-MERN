@@ -4,10 +4,12 @@
   "description": "Culinary Page with MERN stack",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js",
+    "start": "cross-env NODE_ENV=production node app.js",
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -31,11 +33,11 @@
     "moment": "^2.29.1",
     "mongoose": "^5.12.0",
     "multer": "^1.4.2",
-    "multer-gridfs-storage": "^4.2.0",
-    "redux-thunk": "^2.3.0"
+    "multer-gridfs-storage": "^4.2.0"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.7"
   }
 }

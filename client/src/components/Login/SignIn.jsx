@@ -33,7 +33,7 @@ const SignIn = (props) => {
                 <Form
                     onSubmit={formData => {
                         const data = request('/api/auth/login', 'POST', { ...formData });
-                        data.then( res => {
+                        data.then(res => {
                             auth.login(res.token, res.userId);
                         })
                     }}

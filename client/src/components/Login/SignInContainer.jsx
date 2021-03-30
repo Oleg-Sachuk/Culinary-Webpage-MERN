@@ -3,6 +3,8 @@ import Loader from '../../assets/GIFs/Loader';
 import { AuthContext } from '../../context/AuthContext';
 import { UserContext } from '../../context/UserContext';
 import { useHttp } from '../../hooks/http.hook';
+import Footer from '../Footer/Footer';
+import HeaderContainer from '../Header/HeaderContainer';
 import Authenticated from './Authenticated';
 import SignIn from './SignIn';
 
@@ -32,10 +34,12 @@ const SignInContainer = () => {
 
     return (
         <div>
+            <HeaderContainer />
             {auth.isAuth
             ? <Authenticated /> 
             : <SignIn />
             }
+            <Footer />
         </div>
     )
 }
