@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
+const path = require('path');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -14,6 +15,14 @@ app.use('/api/item', require('./routes/recipe.routes'));
 app.use('/api/unit', require('./routes/units.routes'));
 app.use('/api/files', require('./routes/uploads.routes'));
 app.use('/', require('./routes/single-recipe.routes'));
+
+if(process.env.NODE_ENV === 'production') {
+    app.use('/', express.static(path.join(__dirname,'client','build')));
+
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 const start = async () => {
     try {
